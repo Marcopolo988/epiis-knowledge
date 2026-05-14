@@ -85,18 +85,3 @@ ia = next(c for c in cursos if c['codigo'] == 'IFI14')
 print(ia['nombre'], '-', ia['creditos'], 'créditos')
 # > Inteligencia Artificial - 4 créditos
 ```
-
-## 📌 Próximos módulos (en desarrollo)
-
-- `tutorias.json` — Reglamento y proceso de tutorías
-- `servicios.json` — Bienestar universitario, movilidad estudiantil
-- `practicas.json` — Detalle de prácticas pre profesionales
-- `faq.json` — Preguntas frecuentes de estudiantes
-
-## 📜 Licencia
-
-Información pública institucional de la UNSAAC. Uso académico para el curso IF651 - Inteligencia Artificial 2026-1.
-
-## 👥 Autoría
-
-Proyecto académico del curso IF651 Inteligencia Artificial, EPIIS-UNSAAC, Semestre 2026-1.

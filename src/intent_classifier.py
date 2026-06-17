@@ -15,7 +15,7 @@ class IntentClassifier:
         self,
         keywords_mapping: list[dict],
         intents_config: list[dict],
-        threshold: float = 0.5,
+        threshold: float = 0.35,
     ):
         self._threshold = threshold
         # Guardamos confianza_minima como metadato para futura integración ML

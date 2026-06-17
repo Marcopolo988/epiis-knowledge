@@ -34,7 +34,9 @@ class ResponseGenerator:
         if entry is None:
             return _FALLBACK
 
-        respuesta = entry.get("respuesta", _FALLBACK)
+        respuesta = entry.get("respuesta", "").strip()
+        if not respuesta:
+            return _FALLBACK
         fuente = entry.get("fuente", "")
         if fuente:
             respuesta = f"{respuesta}\n\n_Fuente: {fuente}_"

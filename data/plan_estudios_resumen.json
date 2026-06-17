@@ -116,15 +116,17 @@
       "id": "ESP-002",
       "intent": "consulta_esp_cuando_elegir",
       "pregunta": "¿Cuándo elijo mi especialidad?",
-      "respuesta": "",
-      "_pendiente": "El plan curricular 2024 no documenta un mecanismo formal de 'elección de especialidad' como track. Los Estudios de Especialidad empiezan desde el 6° semestre con los electivos. Verificar con la Escuela si existe una declaración formal de mención/especialidad o si la 'especialización' surge solo por la combinación de electivos elegidos."
+      "respuesta": "En la EPIIS no existe una declaración formal de 'elección de especialidad' como trámite. Tu perfil de especialización se forma a partir del 6° semestre, cuando comienzas a cursar los Estudios de Especialidad y eliges los electivos según tu interés (Ingeniería de Software, Redes, Inteligencia Artificial, etc.). Confirma con la Dirección de Escuela si existe alguna mención oficial registrada.",
+      "fuente": "Plan Curricular 2024 EPIIS",
+      "_pendiente": "Verificar con la Escuela si existe declaración formal de mención/especialidad."
     },
     {
       "id": "ESP-003",
       "intent": "consulta_esp_demanda_laboral",
       "pregunta": "¿Qué especialidad tiene más demanda laboral?",
-      "respuesta": "",
-      "_pendiente": "No es información del plan curricular sino de mercado laboral. Si se quiere responder, conviene tomar datos externos confiables (p. ej. estudios del MTPE o IPAE) y citarlos; mientras tanto, dejar fuera del prototipo o derivar al usuario a fuentes oficiales."
+      "respuesta": "No tengo datos estadísticos de mercado laboral para darte una respuesta certera. En general, las líneas con mayor demanda en la región suelen ser Ingeniería de Software e Inteligencia Artificial, pero te recomiendo consultar el portal del Ministerio de Trabajo (mintra.gob.pe) o conversar con docentes de la EPIIS que estén en contacto con el sector.",
+      "fuente": "Orientación general — verificar con fuentes oficiales del mercado laboral",
+      "_pendiente": "Incorporar datos del MTPE o estudios externos confiables."
     },
     {
       "id": "ESP-004",
@@ -137,8 +139,9 @@
       "id": "ESP-005",
       "intent": "consulta_esp_cambio_especialidad",
       "pregunta": "¿Puedo cambiar de especialidad?",
-      "respuesta": "",
-      "_pendiente": "Como ESP-002, depende de si existe una declaración formal de especialidad/mención en la EPIIS. Si no la hay, la 'especialización' se materializa solo por los electivos elegidos y el cambio sería simplemente cambiar de electivos en los siguientes ciclos. Confirmar con la Escuela."
+      "respuesta": "En la EPIIS no existe un trámite formal de 'cambio de especialidad'. Tu especialización se define por los electivos que eliges a partir del 6° semestre, así que si quieres reorientarte puedes simplemente elegir electivos de otra línea en los ciclos siguientes, respetando prerrequisitos. Consulta con la Dirección de Escuela para confirmarlo.",
+      "fuente": "Plan Curricular 2024 EPIIS",
+      "_pendiente": "Confirmar con la Escuela si existe declaración formal de mención."
     },
     {
       "id": "ESP-006",
@@ -158,15 +161,17 @@
       "id": "ESP-008",
       "intent": "consulta_esp_seguridad_certificaciones",
       "pregunta": "¿La carrera prepara para certificaciones en ciberseguridad?",
-      "respuesta": "",
-      "_pendiente": "La malla incluye el curso de Ciberseguridad (IFI32) en el 9° semestre, pero el plan curricular no menciona preparación específica para certificaciones externas (CCNA, CEH, etc.). Verificar con la Escuela antes de afirmarlo."
+      "respuesta": "La malla 2024 incluye el curso de Ciberseguridad (IFI32) en el 9° semestre dentro de la línea de Redes. El plan curricular no menciona preparación formal para certificaciones externas como CCNA, CEH o CompTIA Security+. Si te interesa certificarte, te recomiendo consultar con los docentes del área o con la Dirección de Escuela.",
+      "fuente": "Plan Curricular 2024 EPIIS / Malla 2024",
+      "_pendiente": "Verificar con la Escuela si existen convenios o preparación para certificaciones externas."
     },
     {
       "id": "ESP-009",
       "intent": "consulta_esp_convenios_practicas",
       "pregunta": "¿Hay convenios de prácticas según mi especialidad?",
-      "respuesta": "",
-      "_pendiente": "El plan curricular no lista convenios específicos por línea. La información de empresas con convenio para PPP debe pedirse a la Dirección de Escuela o a la Unidad de Prácticas. Ver también practicas.json."
+      "respuesta": "El plan curricular no detalla convenios por línea de especialidad. Para conocer las empresas e instituciones con convenio vigente para PPP, consulta directamente en la Dirección de la Escuela o en la Unidad de Prácticas de la EPIIS.",
+      "fuente": "Plan Curricular 2024 EPIIS",
+      "_pendiente": "Incorporar lista de empresas con convenio desde la Unidad de Prácticas."
     },
     {
       "id": "ESP-010",

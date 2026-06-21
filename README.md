@@ -1,87 +1,132 @@
-# Repositorio de Conocimiento — EPIIS UNSAAC
+# Chatbot Académico EPIIS — Repositorio de Conocimiento
 
-Repositorio de conocimientos de la **Escuela Profesional de Ingeniería Informática y de Sistemas** de la Universidad Nacional de San Antonio Abad del Cusco (UNSAAC).
+**Repositorio:** https://github.com/Marcopolo988/epiis-knowledge
 
-Este repositorio almacena, en formato JSON estructurado, el conocimiento institucional de la EPIIS para alimentar un **chatbot de atención académica** a estudiantes y docentes. Forma parte del Proyecto Semestral del curso **IF651 Inteligencia Artificial** (2026-1).
+Repositorio de conocimientos y código del chatbot de atención académica de la **Escuela Profesional de Ingeniería Informática y de Sistemas (EPIIS)** de la Universidad Nacional de San Antonio Abad del Cusco (UNSAAC).
 
-## 📂 Estructura del repositorio
+Forma parte del Proyecto Semestral del curso **IF651 Inteligencia Artificial** (2026-1).
+
+---
+
+## Estructura del repositorio
 
 ```
 repo-epiis/
 ├── README.md
-└── data/
-    ├── escuela.json                 # Info general, autoridades, contacto
-    ├── plan_estudios_resumen.json   # Áreas curriculares y estructura
-    ├── cursos.json                  # Catálogo de 78 cursos con sumillas
-    ├── malla_semestralizada.json    # Cursos organizados por semestre (1-10)
-    └── equivalencias.json           # Equivalencias plan 2018 → 2024
+├── src/                            # Código fuente del chatbot
+│   ├── __init__.py
+│   ├── chatbot.py                  # Orquestador principal (ChatbotEPIIS)
+│   ├── intent_classifier.py        # Clasificador por keywords + Jaccard
+│   ├── knowledge_loader.py         # Carga de archivos JSON
+│   ├── response_generator.py       # Generador de respuestas
+│   └── utils.py                    # Normalización de texto
+├── data/                           # Base de conocimiento (respuestas QA)
+│   ├── tutorias.json               # Tutoría académica (TUT/TTUT)
+│   ├── malla_semestralizada.json   # Cursos por semestre (CUR)
+│   ├── plan_estudios_resumen.json  # Especialidades y áreas (ESP)
+│   ├── practicas.json              # Prácticas Pre-Profesionales (PPP)
+│   ├── bienestar.json              # Bienestar universitario (BIE)
+│   ├── movilidad.json              # Movilidad estudiantil (MOV)
+│   ├── matricula.json              # Matrícula (MAT)
+│   ├── titulacion.json             # Titulación y grado (TIT)
+│   └── servicios_academicos.json   # Servicios académicos (SER)
+├── knowledge_base/                 # Configuración del clasificador
+│   ├── intents.json                # Definición de intenciones
+│   └── keywords.json               # Keywords y trigger phrases por intent
+├── corpus/
+│   └── corpus_consultas.json       # Corpus de evaluación (84 consultas etiquetadas)
+├── notebooks/
+│   └── chatbot_epiis.ipynb         # Demo interactiva (Google Colab)
+├── tests/
+│   ├── test_chatbot.py             # Tests del clasificador y respuestas (16 tests)
+│   └── test_knowledge_loader.py    # Tests de carga de datos (7 tests)
+├── docs/
+│   ├── arquitectura.md             # Diagrama de flujo y descripción de módulos
+│   └── modelo_datos.md             # Esquema de los archivos JSON
+└── sources/
+    └── README.md                   # Trazabilidad de fuentes (PDFs utilizados)
 ```
 
-## 📑 Contenido del repositorio
+---
 
-### `escuela.json`
-Información institucional general:
-- Datos de la escuela, facultad y universidad
-- Carrera, grado académico y título profesional
-- Autoridades vigentes (rector, decano, directora de escuela, etc.)
-- Plan curricular vigente y marco legal
-- Enlaces oficiales
-- Competencias genéricas
+## Arquitectura del chatbot
 
-### `plan_estudios_resumen.json`
-Estructura curricular general:
-- 5 áreas curriculares (Estudios Generales, Específicos, Especialidad, Extracurriculares, Prácticas)
-- Total: **59 cursos** y **220 créditos** en **10 semestres**
-- Distribución porcentual por área
-- Rasgos del perfil del egresado
+El chatbot utiliza un clasificador **basado en keywords y similitud Jaccard**, sin dependencias externas de NLP ni modelos de lenguaje. El flujo es:
 
-### `cursos.json`
-Catálogo completo de cursos con:
-- Código y nombre
-- Área curricular y tipo (obligatorio/electivo)
-- Créditos, horas teóricas y prácticas
-- Prerrequisitos (códigos y créditos requeridos)
-- Sumilla y ejes temáticos
-- Competencia genérica vinculada
+```
+Pregunta del usuario
+      │
+      ▼
+  normalize_text()          # minúsculas + sin tildes + sin puntuación
+      │
+      ▼
+  IntentClassifier          # score = 0.65 × keyword_score + 0.35 × trigger_score
+      │
+      ├─ score ≥ 0.35  →  ResponseGenerator → respuesta con fuente
+      └─ score < 0.35  →  mensaje de fallback
+```
 
-### `malla_semestralizada.json`
-Plan de estudios organizado por semestre (1-10), tal como debe llevarlo el estudiante en condiciones regulares.
+Prefijo de intent → archivo de datos:
 
-### `equivalencias.json`
-Tabla de equivalencias entre el **Plan Curricular 2018** y el **Plan Curricular 2024** vigente. Útil para estudiantes en proceso de transición o convalidación.
+| Prefijo | Archivo |
+|---------|---------|
+| TUT / TTUT | tutorias.json |
+| CUR | malla_semestralizada.json |
+| ESP | plan_estudios_resumen.json |
+| PPP | practicas.json |
+| BIE | bienestar.json |
+| MOV | movilidad.json |
+| MAT | matricula.json |
+| TIT | titulacion.json |
+| SER | servicios_academicos.json |
 
-## 🎯 Plan Curricular Vigente
+---
 
-- **Nombre:** Plan Curricular 2024
-- **Aprobado por:** Resolución CU-031-2025-UNSAAC (13 de enero de 2025)
-- **Implementación:** Desde el Año Académico 2025
-- **Modelo educativo:** Formación basada en competencias
+## Cómo ejecutarlo
 
-## 🏛️ Datos institucionales
+### Google Colab (recomendado)
+
+1. Abre [notebooks/chatbot_epiis.ipynb](notebooks/chatbot_epiis.ipynb) en Google Colab
+2. Ejecuta la celda de configuración — clona este repositorio automáticamente
+3. Ejecuta las celdas siguientes para importar el chatbot, probarlo y evaluar el corpus
+
+### Ejecución local
+
+```python
+import sys
+sys.path.insert(0, '/ruta/a/repo-epiis')
+
+from src.chatbot import ChatbotEPIIS
+
+bot = ChatbotEPIIS('/ruta/a/repo-epiis')
+print(bot.ask('¿Cuándo es la matrícula?'))
+```
+
+### Tests
+
+```bash
+python -m pytest tests/ -v
+```
+
+---
+
+## Corpus de evaluación
+
+El archivo `corpus/corpus_consultas.json` contiene **84 consultas etiquetadas** con su `intent_esperado`, distribuidas sobre todas las categorías temáticas. Sirve como corpus de evaluación para medir la accuracy del clasificador de forma automatizada:
+
+```
+Accuracy: 84/84 = 100.0%
+```
+
+La celda 5 del notebook ejecuta la evaluación completa y muestra los errores en detalle.
+
+---
+
+## Datos institucionales
 
 - **Universidad:** Universidad Nacional de San Antonio Abad del Cusco (UNSAAC)
 - **Facultad:** Ingeniería Eléctrica, Electrónica, Informática y Mecánica (FIEEIM)
 - **Escuela:** Ingeniería Informática y de Sistemas (EPIIS)
+- **Plan Curricular:** 2024 — vigente desde Año Académico 2025
 - **Web oficial:** https://in.unsaac.edu.pe/
-
-## 🛠️ Uso del repositorio
-
-Los archivos JSON están diseñados para ser consumidos por:
-- Chatbots de atención académica (proyecto del curso IF651)
-- Sistemas de recomendación de cursos
-- Aplicaciones de consulta de información institucional
-- Herramientas de planificación académica
-
-### Ejemplo de consumo en Python
-
-```python
-import json
-
-with open('data/cursos.json', 'r', encoding='utf-8') as f:
-    cursos = json.load(f)['cursos']
-
-# Buscar curso por código
-ia = next(c for c in cursos if c['codigo'] == 'IFI14')
-print(ia['nombre'], '-', ia['creditos'], 'créditos')
-# > Inteligencia Artificial - 4 créditos
-```
+- **Repositorio:** https://github.com/Marcopolo988/epiis-knowledge
